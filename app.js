@@ -1,4 +1,4 @@
-import chatPage from "./pages/chatPage";
+import catgoriPage from "./pages/catgoriPage";
 import mypage from "./pages/mypage";
 import mapPage from "./pages/mapPage";
 
@@ -16,8 +16,8 @@ function router() {
   console.log(routePath, 'routePath');
   if (routePath === '') {
     mapPage(container)
-  } else if (routePath.indexOf('#chatbot') >= 0) {
-    chatPage(container);
+  } else if (routePath.indexOf('#catgoriPage') >= 0) {
+    catgoriPage(container);
   } else if (routePath.indexOf('#mypage') >= 0) {
     mypage(container)
   }

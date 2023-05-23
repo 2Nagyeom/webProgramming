@@ -2,7 +2,7 @@ import bottomTab from "../../component/bottomTab";
 
 export default function chatPage(container) {
     let template = `
-        <h1>챗봇</h1>
+        <h1>카테고리 페이지</h1>
         ${bottomTab()}
 
         `
