@@ -1,17 +1,24 @@
 import busan_gu from "../../busan_gu.json";
+import myPage from "../mypage/index.js"
 
 export default function mapPage(container) {
   let template = `
     <div id="map"></div>
-
+    <button id="goToOtherPageButton">다른 페이지로 이동</button>
   `;
   container.innerHTML = template;
   initMap();
   initPolygons();
   initMarkers();
+
+  const goToOtherPageButton = document.getElementById('goToOtherPageButton');
+  goToOtherPageButton.addEventListener('click', () => {
+    window.location.href = "../mypage/index.js"// 다른 페이지의 URL을 여기에 설정
+  });
 }
 
 let map;
+
 const img_Junggu = new URL(
   '../../img/junggu.png?as=webp&width=100',
   import.meta.url
