@@ -1,9 +1,8 @@
-.navbar {
+.headbar {
     background-color: #73B2FB;
     overflow: hidden;
     position: absolute;
-    border-radius: 15px 15px 0px 0px;
-    bottom: -71%;
+    top: 0;
     width: 100%;
-    height: 80%;
+    height: 9%;
 }

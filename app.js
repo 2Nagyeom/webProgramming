@@ -1,6 +1,7 @@
 import catgoriPage from "./pages/catgoriPage";
 import mypage from "./pages/mypage";
 import mapPage from "./pages/mapPage";
+import { bottomSheetUtils } from "./utils";
 
 // root 를 가져와서 container 에 할당
 const container = document.getElementById('root');
@@ -26,3 +27,4 @@ function router() {
 window.addEventListener('hashchange', router);
 
 router();
+bottomSheetUtils();

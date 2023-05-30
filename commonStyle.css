@@ -16,10 +16,21 @@
     background-color: white;
 }
 
+#head {
+    height: 10%;
+    width: 100%;
+}
+
 #root {
     height: 100%;
     width: 100%;
 }
+
+#bot {
+    height: 10%;
+    width: 100%;
+}
+
 #map{
     height: 100%;
     width: 100%;
