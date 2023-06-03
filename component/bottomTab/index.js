@@ -24,6 +24,8 @@ export default function bottomTab() {
   return template;
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
   const bottomSheet = document.getElementById('bottomSheet');
   let prevClickedDiv = null;
@@ -52,3 +54,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
