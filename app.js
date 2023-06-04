@@ -15,6 +15,10 @@ const store = {
 function router() {
   const routePath = location.hash;
   console.log(routePath, 'routePath');
+  console.log(routePath.split('/').length,'routePath.length');
+  if(routePath.split('/').length >= 5){
+    return;
+  }
   if (routePath === '') {
     mapPage(container)
   } else if (routePath.indexOf('#catgoriPage') >= 0) {

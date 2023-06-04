@@ -100,7 +100,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 35.17944, lng: 129.07556 },
     zoom: 11,
-    mapId: "48d8ea791651eb12",
+    mapId: "c9332c719080c739",
   });
 }
 

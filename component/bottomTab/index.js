@@ -21,37 +21,6 @@ export default function bottomTab() {
     <div class="contentslist">ㅎㅇ</div>
   </div>
   `;
-  return template;
+  // container.innerHTML = template;
+  return template
 }
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const bottomSheet = document.getElementById('bottomSheet');
-  let prevClickedDiv = null;
-
-  bottomSheet.addEventListener('click', function(event) {
-    if (event.target.classList.contains('navcontent')) {
-      event.target.style.backgroundColor = 'red';
-      event.target.style.color = 'white';
-    }
-  });
-  bottomSheet.addEventListener('click', function(event) {
-    const clickedDiv = event.target.closest('.navcontent');
-  
-    if (clickedDiv) {
-      if (prevClickedDiv) {
-        // 이전에 클릭한 div를 원래 상태로 되돌립니다.
-        prevClickedDiv.style.backgroundColor = ''; // 기본 배경색으로 변경
-        prevClickedDiv.style.color = ''; // 기본 텍스트 색상으로 변경
-      }
-  
-      clickedDiv.style.backgroundColor = 'red'; // 클릭한 div의 스타일을 변경합니다.
-      clickedDiv.style.color = 'white';
-  
-      // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
-      prevClickedDiv = clickedDiv;
-    }
-  });
-});
-
