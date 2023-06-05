@@ -1,5 +1,6 @@
-import busan_generalHospital from "../../busan_generalHospital.json"
+import busan_generalHospital from "../../busan_generalHospital.json";
 import busan_cctv from "../../busan_cctv.json";
+import busan_fastCharger from "../../busan_fastCharger.json";
 import bottomTab from "../../component/bottomTab";
 import headerTab from "../../component/headerTab";
 
@@ -10,6 +11,11 @@ const img_Hospitalicon = new URL(
 
 const img_Cctvicon = new URL(
     '../../img/cctv.png?as=webp&width=20',
+    import.meta.url
+)
+
+const img_Fastchargericon = new URL(
+    '../../img/fastcharger.png?as=webp&width=40',
     import.meta.url
 )
 
@@ -36,6 +42,7 @@ function deleteMarkers(){
         markers[i].setMap(null);
     };
     markers = [];
+
 }
 
 function hashDiffIcon() {
@@ -51,7 +58,7 @@ function hashDiffIcon() {
                 // makeIcon(busan_cctv, img_Cctvicon.href);
                 break;
             case '복지시설':
-                // makeIcon(busan_cctv, img_Cctvicon.href);
+                makeIcon(busan_fastCharger, img_Fastchargericon.href);
                 break;
             case '의료시설':
                 makeIcon(busan_generalHospital, img_Hospitalicon.href);
