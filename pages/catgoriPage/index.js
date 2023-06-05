@@ -1,6 +1,8 @@
 import busan_generalHospital from "../../busan_generalHospital.json";
 import busan_cctv from "../../busan_cctv.json";
 import busan_fastCharger from "../../busan_fastCharger.json";
+import busan_reCenter from "../../busan_recenter.json";
+import busan_activeCenter from "../../busan_activecenter.json";
 import bottomTab from "../../component/bottomTab";
 import headerTab from "../../component/headerTab";
 
@@ -18,6 +20,16 @@ const img_Fastchargericon = new URL(
     '../../img/fastcharger.png?as=webp&width=40',
     import.meta.url
 )
+
+const img_Recentericon = new URL(
+    '../../img/recenter.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Activecentericon = new URL(
+    '../../img/activecenter.png?as=webp&width=40',
+    import.meta.url
+) 
 
 let map;
 let markers = [];
@@ -57,8 +69,10 @@ function hashDiffIcon() {
             case '범죄발생현황':
                 // makeIcon(busan_cctv, img_Cctvicon.href);
                 break;
-            case '복지시설':
+            case '편의시설':
                 makeIcon(busan_fastCharger, img_Fastchargericon.href);
+                makeIcon(busan_reCenter, img_Recentericon.href);
+                makeIcon(busan_activeCenter, img_Activecentericon.href);
                 break;
             case '의료시설':
                 makeIcon(busan_generalHospital, img_Hospitalicon.href);
