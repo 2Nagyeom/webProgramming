@@ -586,7 +586,7 @@ async function router() {
         (0, _splashPageDefault.default)(container);
         setTimeout(()=>{
             location.hash = "#mainPage";
-        }, 1500);
+        }, 7000);
     } else if (routePath.indexOf("#mainPage") >= 0) {
         (0, _mainPageDefault.default)(container);
         (0, _mainPageLogicDefault.default)();
@@ -666,6 +666,7 @@ function hashDiffIcon() {
         switch(routeSplit[4]){
             case "치안센터":
                 makeIcon((0, _busanCctvJsonDefault.default), img_Cctvicon.href);
+                document.getElementById("selectList").innerHTML = (0, _bottomTab.createSelectList)((0, _busanCctvJsonDefault.default));
                 break;
             case "범죄발생현황":
                 getColor((0, _busanGuJsonDefault.default));
@@ -695,7 +696,6 @@ function categoryPage(container) {
     let template = `
         <div id="map"></div>
         ${(0, _headerTabDefault.default)()}
-        <div id="testDiv"
         ${(0, _bottomTabDefault.default)()}
     `;
     function initMap() {
@@ -752,7 +752,7 @@ function bottomTab() {
           </div>
         </div>
         <div class="contentslist">
-        <ul class="selectList">
+        <ul class="selectList" id="selectList">
           <li>카테고리를 눌러주세요</li>
         </ul>
       </div>
@@ -1711,7 +1711,7 @@ exports.default = ()=>{
             console.log(initialY, "stop drag initial Y");
         }
         let prevClickedDiv = null;
-    }, 2000);
+    }, 1000);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}]},["luORH","igcvL"], "igcvL", "parcelRequireeb63")

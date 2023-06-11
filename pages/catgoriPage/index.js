@@ -79,7 +79,7 @@ function hashDiffIcon() {
         switch (routeSplit[4]) {
             case '치안센터':
                 makeIcon(busan_cctv, img_Cctvicon.href);
-                // document.getElementById('selectList').innerHTML = createSelectList(busan_cctv)
+                document.getElementById('selectList').innerHTML = createSelectList(busan_cctv)
                 break;
             case '범죄발생현황':
                 getColor(busan_gu);
@@ -113,7 +113,6 @@ export default function categoryPage(container) {
     let template = `
         <div id="map"></div>
         ${headerTab()}
-        <div id="testDiv"
         ${bottomTab()}
     `
 

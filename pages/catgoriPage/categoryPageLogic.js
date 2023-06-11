@@ -78,5 +78,5 @@ export default () => {
             console.log(initialY, 'stop drag initial Y');
         }
         let prevClickedDiv = null;
-    }, 2000);
+    }, 1000);
 }

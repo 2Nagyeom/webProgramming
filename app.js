@@ -21,7 +21,7 @@ async function router() {
     splashPage(container)
     setTimeout(() => {
       location.hash = '#mainPage';
-    }, 1500);
+    }, 7000);
   }else if(routePath.indexOf('#mainPage') >= 0){
     mainPage(container)
     mainPageLogic()

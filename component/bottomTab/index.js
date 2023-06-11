@@ -26,7 +26,7 @@ export default function bottomTab() {
           </div>
         </div>
         <div class="contentslist">
-        <ul class="selectList">
+        <ul class="selectList" id="selectList">
           <li>카테고리를 눌러주세요</li>
         </ul>
       </div>
