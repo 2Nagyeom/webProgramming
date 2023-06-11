@@ -1,34 +1,43 @@
 import catgoriPage from "./pages/catgoriPage";
-import mypage from "./pages/mypage";
+import categoryPageLogic from "./pages/catgoriPage/categoryPageLogic";
+import mainPage from "./pages/mainPage";
+import mainPageLogic from "./pages/mainPage/mainPageLogic";
 import mapPage from "./pages/mapPage";
-import { bottomSheetUtils } from "./utils";
+import resultDetailPage from "./pages/resultDetailPage";
+import resultDetailPageLogic from "./pages/resultDetailPage/resultDetailPageLogic";
+import resultPage from "./pages/resultPage";
+import resultPageLogic from "./pages/resultPage/resultPageLogic";
+import splashPage from "./pages/splashPage";
 
-// root 를 가져와서 container 에 할당
 const container = document.getElementById('root');
 
-const store = {
-  currentPage: 1,
-  feeds: [],
-};
-
-
-function router() {
+async function router() {
   const routePath = location.hash;
-  console.log(routePath, 'routePath');
-  console.log(routePath.split('/').length,'routePath.length');
   if(routePath.split('/').length >= 5){
     return;
   }
+
   if (routePath === '') {
-    mapPage(container)
-  } else if (routePath.indexOf('#catgoriPage') >= 0) {
+    splashPage(container)
+    setTimeout(() => {
+      location.hash = '#mainPage';
+    }, 1500);
+  }else if(routePath.indexOf('#mainPage') >= 0){
+    mainPage(container)
+    mainPageLogic()
+  }else if (routePath.indexOf('#resultPage') >= 0) {
+    resultPage(container)
+    resultPageLogic()
+  }else if (routePath.indexOf('#resultDetailPage') >= 0) {
+    resultDetailPage(container)
+    resultDetailPageLogic()
+  } else if (routePath.indexOf('#categoryPage') >= 0) {
     catgoriPage(container);
-  } else if (routePath.indexOf('#mypage') >= 0) {
-    mypage(container)
+    categoryPageLogic()
   }
 }
 
 window.addEventListener('hashchange', router);
-
 router();
-bottomSheetUtils();
+
+

@@ -80,20 +80,17 @@ const img_Gijanggun = new URL(
   import.meta.url
 )
 
+let map;
+
 export default function mapPage(container) {
   let template = `
     <div id="map"></div>
-    
   `;
   container.innerHTML = template;
   initMap();
   initPolygons();
   initMarkers();
-
-
 }
-
-let map;
 
 
 function initMap() {
@@ -119,9 +116,9 @@ function initPolygons() {
 function createPolygon(polygonArr) {
   const polygon = new google.maps.Polygon({
     paths: polygonArr,
-    strokeColor: "black",
+    strokeColor: "#73B2FB",
     strokeOpacity: 0.8,
-    strokeWeight: 3,
+    strokeWeight: 2,
     fillColor: "#00000000",
     fillOpacity: 0.35,
   });

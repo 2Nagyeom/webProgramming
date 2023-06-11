@@ -9,6 +9,39 @@ export async function bottomSheetUtils() {
   dragElement.addEventListener('mousedown', startDrag);
   dragElement.addEventListener('mousemove', drag);
   dragElement.addEventListener('mouseup', stopDrag);
+  dragElement.addEventListener('click',(event)=>{
+       if (event.target.classList.contains('navcontent')) {
+        event.target.style.backgroundColor = 'red';
+        event.target.style.color = 'white';
+
+        const routePath = decodeURI(location.hash);
+        const routeSplit = routePath.split('/');
+
+        if (routeSplit.length >= 5) {
+          routeSplit.pop();
+          routeSplit.push(event.target.innerText);
+          const path = routeSplit.join('/')
+          location.hash = path;
+        } else {
+          location.hash += '/' + event.target.innerText
+        }
+      }
+      const clickedDiv = event.target.closest('.navcontent');
+
+      if (clickedDiv) {
+        if (prevClickedDiv) {
+          // 이전에 클릭한 div를 원래 상태로 되돌립니다.
+          prevClickedDiv.style.backgroundColor = ''; // 기본 배경색으로 변경
+          prevClickedDiv.style.color = ''; // 기본 텍스트 색상으로 변경
+        }
+
+        clickedDiv.style.backgroundColor = 'red'; // 클릭한 div의 스타일을 변경합니다.
+        clickedDiv.style.color = 'white';
+
+        // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
+        prevClickedDiv = clickedDiv;
+      }
+  })
 
   function startDrag(event) {
     isDragging = true;
@@ -45,42 +78,46 @@ export async function bottomSheetUtils() {
   }
 
   const bottomSheet = document.getElementById('bottomSheet');
+  const navcontent = document.getElementById('navcontent');
   let prevClickedDiv = null;
 
-  document.addEventListener('DOMContentLoaded', function () {
-    bottomSheet.addEventListener('click', function (event) {
-      if (event.target.classList.contains('navcontent')) {
-        event.target.style.backgroundColor = 'red';
-        event.target.style.color = 'white';
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   navcontent.addEventListener('click',(event)=>{
+  //     console.log(event,'event');
+  //   })
 
-        const routePath = decodeURI(location.hash);
-        const routeSplit = routePath.split('/');
+  //   bottomSheet.addEventListener('click', function (event) {
+  //     if (event.target.classList.contains('navcontent')) {
+  //       event.target.style.backgroundColor = 'red';
+  //       event.target.style.color = 'white';
 
-        if (routeSplit.length >= 5) {
-          routeSplit.pop();
-          routeSplit.push(event.target.innerText);
-          const path = routeSplit.join('/')
-          location.hash = path;
-        } else {
-          location.hash += '/' + event.target.innerText
-        }
-      }
-      const clickedDiv = event.target.closest('.navcontent');
+  //       const routePath = decodeURI(location.hash);
+  //       const routeSplit = routePath.split('/');
 
-      if (clickedDiv) {
-        if (prevClickedDiv) {
-          // 이전에 클릭한 div를 원래 상태로 되돌립니다.
-          prevClickedDiv.style.backgroundColor = ''; // 기본 배경색으로 변경
-          prevClickedDiv.style.color = ''; // 기본 텍스트 색상으로 변경
-        }
+  //       if (routeSplit.length >= 5) {
+  //         routeSplit.pop();
+  //         routeSplit.push(event.target.innerText);
+  //         const path = routeSplit.join('/')
+  //         location.hash = path;
+  //       } else {
+  //         location.hash += '/' + event.target.innerText
+  //       }
+  //     }
+  //     const clickedDiv = event.target.closest('.navcontent');
 
-        clickedDiv.style.backgroundColor = 'red'; // 클릭한 div의 스타일을 변경합니다.
-        clickedDiv.style.color = 'white';
+  //     if (clickedDiv) {
+  //       if (prevClickedDiv) {
+  //         // 이전에 클릭한 div를 원래 상태로 되돌립니다.
+  //         prevClickedDiv.style.backgroundColor = ''; // 기본 배경색으로 변경
+  //         prevClickedDiv.style.color = ''; // 기본 텍스트 색상으로 변경
+  //       }
 
-        // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
-        prevClickedDiv = clickedDiv;
-      }
-    });
-    console.log('DOMContentLoaded');
-  });
+  //       clickedDiv.style.backgroundColor = 'red'; // 클릭한 div의 스타일을 변경합니다.
+  //       clickedDiv.style.color = 'white';
+
+  //       // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
+  //       prevClickedDiv = clickedDiv;
+  //     }
+  //   });
+  // });
 }
