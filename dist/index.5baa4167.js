@@ -586,7 +586,7 @@ async function router() {
         (0, _splashPageDefault.default)(container);
         setTimeout(()=>{
             location.hash = "#mainPage";
-        }, 7000);
+        }, 1000);
     } else if (routePath.indexOf("#mainPage") >= 0) {
         (0, _mainPageDefault.default)(container);
         (0, _mainPageLogicDefault.default)();
@@ -602,9 +602,9 @@ async function router() {
     }
 }
 window.addEventListener("hashchange", router);
-router();
+router(); // 
 
-},{"./pages/catgoriPage":"Y76yY","./pages/mapPage":"A8G98","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","./pages/splashPage":"dlFvq","./pages/mainPage":"6S2sV","./pages/resultPage":"fd05G","./pages/mainPage/mainPageLogic":"6i3uQ","./pages/resultDetailPage":"3JZpl","./pages/resultDetailPage/resultDetailPageLogic":"g8Qfm","./pages/resultPage/resultPageLogic":"1zWMY","./pages/catgoriPage/categoryPageLogic":"iunvf"}],"Y76yY":[function(require,module,exports) {
+},{"./pages/catgoriPage":"Y76yY","./pages/mapPage":"A8G98","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","./pages/catgoriPage/categoryPageLogic":"iunvf","./pages/mainPage":"6S2sV","./pages/mainPage/mainPageLogic":"6i3uQ","./pages/resultDetailPage":"3JZpl","./pages/resultDetailPage/resultDetailPageLogic":"g8Qfm","./pages/resultPage":"fd05G","./pages/resultPage/resultPageLogic":"1zWMY","./pages/splashPage":"dlFvq"}],"Y76yY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _busanGeneralHospitalJson = require("../../busan_generalHospital.json");
@@ -1229,27 +1229,84 @@ module.exports = require("e8926dc17631a1d6").getBundleURL("1G2bZ") + "sasanggu.c
 },{"e8926dc17631a1d6":"jMDco"}],"5lXnF":[function(require,module,exports) {
 module.exports = require("e9c842753404a716").getBundleURL("1G2bZ") + "gijanggun.3e0c9df7.webp" + "?" + Date.now();
 
-},{"e9c842753404a716":"jMDco"}],"dlFvq":[function(require,module,exports) {
+},{"e9c842753404a716":"jMDco"}],"iunvf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const img_mainLogo = new URL(require("ed13de865aa749d3"));
-exports.default = (container)=>{
-    let template = `
-        <div style="display: flex; justify-content: center; align-items:center; height: 100vh;">
-            <img style="display: block;" src="${img_mainLogo}">
-        </div>
-    `;
-    container.innerHTML = template;
+exports.default = ()=>{
+    setTimeout(()=>{
+        let isDragging = false;
+        let dragElement = document.getElementById("bottomSheet");
+        let initialY = 0;
+        let currentY = 0;
+        let targetY = 523; // 목표 위치 (예: 200px)
+        let isReturning = false; // 추가된 변수: 원래 위치로 돌아가는 중인지 여부
+        dragElement.addEventListener("mousedown", startDrag);
+        dragElement.addEventListener("mousemove", drag);
+        dragElement.addEventListener("mouseup", stopDrag);
+        dragElement.addEventListener("click", (event)=>{
+            if (event.target.classList.contains("navcontent")) {
+                event.target.style.backgroundColor = "red";
+                event.target.style.color = "white";
+                const routePath = decodeURI(location.hash);
+                const routeSplit = routePath.split("/");
+                if (routeSplit.length >= 5) {
+                    routeSplit.pop();
+                    routeSplit.push(event.target.innerText);
+                    const path = routeSplit.join("/");
+                    location.hash = path;
+                } else location.hash += "/" + event.target.innerText;
+            }
+            const clickedDiv = event.target.closest(".navcontent");
+            if (clickedDiv) {
+                if (prevClickedDiv) {
+                    // 이전에 클릭한 div를 원래 상태로 되돌립니다.
+                    prevClickedDiv.style.backgroundColor = ""; // 기본 배경색으로 변경
+                    prevClickedDiv.style.color = ""; // 기본 텍스트 색상으로 변경
+                }
+                clickedDiv.style.backgroundColor = "red"; // 클릭한 div의 스타일을 변경합니다.
+                clickedDiv.style.color = "white";
+                // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
+                prevClickedDiv = clickedDiv;
+            }
+        });
+        function startDrag(event) {
+            isDragging = true;
+            if (!isReturning) {
+                initialY = event.clientY;
+                currentY = event.clientY - initialY;
+            }
+            console.log(event.clientY);
+        }
+        function drag(event) {
+            if (isDragging) {
+                if (!isReturning) {
+                    currentY = event.clientY - initialY;
+                    if (currentY < targetY) dragElement.style.transform = `translateY(${currentY}px)`;
+                    else {
+                        dragElement.style.transform = `translateY(${targetY}px)`;
+                        stopDrag();
+                    }
+                }
+            }
+        }
+        function stopDrag() {
+            isDragging = false;
+            if (currentY >= targetY) {
+                isReturning = true;
+                dragElement.style.transform = "translateY(0)";
+            } else initialY = currentY;
+            console.log(initialY, "stop drag initial Y");
+        }
+        let prevClickedDiv = null;
+    }, 1000);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","ed13de865aa749d3":"6lpKU"}],"6lpKU":[function(require,module,exports) {
-module.exports = require("3fb062412c3a04f1").getBundleURL("1G2bZ") + "mainLogo.f6a45e83.webp" + "?" + Date.now();
-
-},{"3fb062412c3a04f1":"jMDco"}],"6S2sV":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"6S2sV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = (container)=>{
     let template = `
+
         <div>
             <h1>메인페이지</h1>
             ${inputWithTitle("selectBoxToCompany", "직장선택")}
@@ -1264,10 +1321,143 @@ exports.default = (container)=>{
 };
 const inputWithTitle = (id, title)=>{
     return `
-        <span>${title}</span>
-        <input id=${id}></input>
-        
+        <div style="display:flex;flex-direction:row;">
+            <span>${title}</span>
+            <div id=${id} style="width:300px;height:60px;border-width:thin;background-color:yellow"></div>
+        </div>
     `;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"6i3uQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _store = require("../../store");
+var _storeDefault = parcelHelpers.interopDefault(_store);
+const openDaumAddressPopup = (selectBoxToCompany)=>{
+    return new daum.Postcode({
+        oncomplete: function(data) {
+            const address = data.address;
+            selectBoxToCompany.innerText = address;
+            fetch("https://dapi.kakao.com/v2/local/search/address.json?query=" + address, {
+                headers: {
+                    "Authorization": "KakaoAK 75fa87747de5986f0d54c12a967f3d09"
+                }
+            }).then((res)=>res.json()).then((res)=>{
+                const { x , y  } = res?.documents[0]?.address;
+                (0, _storeDefault.default).dispatcher({
+                    type: "setCompnyXY",
+                    param: {
+                        companyX: x,
+                        companyY: y
+                    }
+                });
+                console.log((0, _storeDefault.default).getState(), "getState");
+            }).catch((err)=>{
+                console.error(err);
+            });
+        }
+    }).open();
+};
+exports.default = ()=>{
+    setTimeout(()=>{
+        console.log("main Logic");
+        const selectBoxToCompany = document.getElementById("selectBoxToCompany");
+        selectBoxToCompany.addEventListener("click", ()=>{
+            openDaumAddressPopup(selectBoxToCompany);
+            console.log("selectBoxToCompany");
+        });
+        const selectBoxToCenter = document.getElementById("selectBoxToCenter");
+        selectBoxToCenter.addEventListener("click", ()=>{
+            console.log("selectBoxToCenter");
+        });
+        const mainPageResultBtn = document.getElementById("mainPageResultBtn");
+        mainPageResultBtn.addEventListener("click", ()=>{
+            location.hash = "#resultPage";
+        });
+    }, 1000);
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","../../store":"9cnTH"}],"9cnTH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const store = ()=>{
+    let state;
+    let subScripArr = [];
+    function getState() {
+        return {
+            ...state
+        };
+    }
+    function dispatcher(action) {
+        state = dispatch(state, action);
+        subScripArr.forEach((value)=>value());
+    }
+    function subScrip(func) {
+        subScripArr.push(func);
+    }
+    return {
+        getState,
+        dispatcher,
+        subScrip
+    };
+};
+const initialState = {
+    companyX: null,
+    companyY: null
+};
+const dispatch = (state = initialState, action)=>{
+    switch(action.type){
+        case "setCompnyXY":
+            return {
+                ...state,
+                companyX: action.param.companyX,
+                companyY: action.param.companyY
+            };
+        default:
+            break;
+    }
+};
+exports.default = store();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"3JZpl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _headerTab = require("../../component/headerTab");
+var _headerTabDefault = parcelHelpers.interopDefault(_headerTab);
+exports.default = (container)=>{
+    const routePath = decodeURI(location.hash);
+    var hashArray = routePath.split("/");
+    var guName = hashArray[1];
+    let template = `
+        ${(0, _headerTabDefault.default)()}
+        <div id='resultList'>
+            <p><span style="font-weight:bold">${guName}</span>의 치안 위험 정도는 <span style="color:green">좋음</span> 입니다</p>
+            <p><span style="font-weight:bold">${guName}</span>의 복지시설 정도는 <span style="color:orange">보통</span> 입니다</p>
+            <p><span style="font-weight:bold">${guName}</span>의 선호시설 정도는 <span style="color:yellow">양호</span> 입니다</p>
+            <p><span style="font-weight:bold">${guName}</span>의 편의시설 정도는 <span style="color:green">좋음</span> 입니다</p>
+        </div>
+        <div id='continueBtn' style="text-align:center">
+            <h1>자세히보기로</h1>
+        </div>
+    `;
+    container.innerHTML = template;
+};
+
+},{"../../component/headerTab":"cbsqo","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"g8Qfm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+exports.default = ()=>{
+    const routePath = decodeURI(location.hash);
+    var hashArray = routePath.split("/");
+    var guName = hashArray[1];
+    var initialLat = Number(hashArray[2]);
+    var initialLng = Number(hashArray[3]);
+    setTimeout(()=>{
+        const continueBtn = document.getElementById("continueBtn");
+        continueBtn.addEventListener("click", ()=>{
+            location.hash = `#categoryPage/${initialLat}/${initialLng}/${guName}`;
+        });
+    }, 1000);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"fd05G":[function(require,module,exports) {
@@ -1295,7 +1485,7 @@ const img_Sasanggu = new URL(require("977a9b39ee54dd90"));
 const img_Gijanggun = new URL(require("d7c03bdfbde679e8"));
 exports.default = (container)=>{
     let template = `
-    <div id='mapResult' style="width:100%; height:85%; justify-content: center;">
+    <div id='mapResult' style="width:100%; height:85%; justify-content: center; margin-top:44px">
     <div id='map'></div>
     </div>
     ${(0, _headerTabDefault.default)()}
@@ -1573,147 +1763,128 @@ function initMarkers() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","../../component/headerTab":"cbsqo","../../busan_gu.json":"94gdz","7442b7b68d4ecde4":"h9hnr","826305086f3471c2":"4wAkN","474a87047fd1be60":"7pKcc","b25a69412ebe96b3":"cui2q","d31a7e624937677b":"2JcG4","8a91f1cadcf4f932":"2ENoz","53dded538839789d":"4mldW","99318a0dedc716c2":"Vx0FQ","7860537f019dde0":"bCgpA","9f635d22d354877b":"ifkvr","108a626b299d77bb":"lLkrv","61ac3d683bd738d5":"brmsc","97a6f16082bbffec":"94FlP","64213b58caaaaf34":"hLVrP","977a9b39ee54dd90":"c6fS8","d7c03bdfbde679e8":"5lXnF"}],"6i3uQ":[function(require,module,exports) {
+},{"../../component/headerTab":"cbsqo","7442b7b68d4ecde4":"h9hnr","826305086f3471c2":"4wAkN","474a87047fd1be60":"7pKcc","b25a69412ebe96b3":"cui2q","d31a7e624937677b":"2JcG4","8a91f1cadcf4f932":"2ENoz","53dded538839789d":"4mldW","99318a0dedc716c2":"Vx0FQ","7860537f019dde0":"bCgpA","9f635d22d354877b":"ifkvr","108a626b299d77bb":"lLkrv","61ac3d683bd738d5":"brmsc","97a6f16082bbffec":"94FlP","64213b58caaaaf34":"hLVrP","977a9b39ee54dd90":"c6fS8","d7c03bdfbde679e8":"5lXnF","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","../../busan_gu.json":"94gdz"}],"1zWMY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _getDiffDistance = require("../../getDiffDistance");
+var _store = require("../../store");
+var _storeDefault = parcelHelpers.interopDefault(_store);
+const locations = {
+    중구: {
+        lat: 35.10644444444444,
+        lng: 129.0305
+    },
+    서구: {
+        lat: 35.08004472650553,
+        lng: 129.01415942028981
+    },
+    동구: {
+        lat: 35.12830769230769,
+        lng: 129.04597435897435
+    },
+    영도구: {
+        lat: 35.073854545454545,
+        lng: 129.06974545454545
+    },
+    진구: {
+        lat: 35.156014492753625,
+        lng: 129.0465072463768
+    },
+    동래구: {
+        lat: 35.20005925925926,
+        lng: 129.08222222222219
+    },
+    남구: {
+        lat: 35.11572580645162,
+        lng: 129.09545161290322
+    },
+    북구: {
+        lat: 35.22001408450705,
+        lng: 129.02711267605632
+    },
+    해운대구: {
+        lat: 35.17927083333334,
+        lng: 129.1547604166667
+    },
+    사하구: {
+        lat: 35.08550000000001,
+        lng: 128.98085576923074
+    },
+    연제구: {
+        lat: 35.17546551724138,
+        lng: 129.08129310344825
+    },
+    사상구: {
+        lat: 35.150968749999995,
+        lng: 128.98760937499997
+    },
+    수영구: {
+        lat: 35.15090697674418,
+        lng: 129.11220930232557
+    },
+    금정구: {
+        lat: 35.246705882352946,
+        lng: 129.09040196078433
+    },
+    강서구: {
+        lat: 35.1593,
+        lng: 128.933
+    },
+    기장군: {
+        lat: 35.29200423728813,
+        lng: 129.19918644067804
+    }
+};
+// console.log(getDiffDistance(companyX,companyY,companyX+10,companyY-10,))
 exports.default = ()=>{
-    setTimeout(()=>{
-        console.log("main Logic");
-        const selectBoxToCompany = document.getElementById("selectBoxToCompany");
-        selectBoxToCompany.addEventListener("click", ()=>{
-            console.log("selectBoxToCompany");
-        });
-        const selectBoxToCenter = document.getElementById("selectBoxToCenter");
-        selectBoxToCenter.addEventListener("click", ()=>{
-            console.log("selectBoxToCenter");
-        });
-        const mainPageResultBtn = document.getElementById("mainPageResultBtn");
-        mainPageResultBtn.addEventListener("click", ()=>{
-            location.hash = "#resultPage";
-        });
-    }, 1000);
+    let { companyX , companyY  } = (0, _storeDefault.default).getState();
+    let locationKeyValue = Object.entries(locations);
+    locationKeyValue = locationKeyValue.map((value, index)=>{
+        return [
+            value[0],
+            {
+                ...value[1],
+                distance: (0, _getDiffDistance.getDiffDistance)(companyX, companyY, value[1].lat, value[1].lng)
+            }
+        ];
+    });
+    console.log(Object.fromEntries(locationKeyValue));
+    setTimeout(()=>{}, 1000);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"3JZpl":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","../../store":"9cnTH","../../getDiffDistance":"9Bk1v"}],"9Bk1v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _headerTab = require("../../component/headerTab");
-var _headerTabDefault = parcelHelpers.interopDefault(_headerTab);
+parcelHelpers.export(exports, "getDiffDistance", ()=>getDiffDistance);
+function getDiffDistance(lat1, lon1, lat2, lon2) {
+    function toRad(degrees) {
+        return degrees * Math.PI / 180;
+    }
+    const R = 6371000; // 지구의 평균 반지름 (m)
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"dlFvq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const img_mainLogo = new URL(require("ed13de865aa749d3"));
 exports.default = (container)=>{
-    const routePath = decodeURI(location.hash);
-    var hashArray = routePath.split("/");
-    var guName = hashArray[1];
     let template = `
-        ${(0, _headerTabDefault.default)()}
-        <div id='resultList'>
-            <p><span style="font-weight:bold">${guName}</span>의 치안 위험 정도는 <span style="color:green">좋음</span> 입니다</p>
-            <p><span style="font-weight:bold">${guName}</span>의 복지시설 정도는 <span style="color:orange">보통</span> 입니다</p>
-            <p><span style="font-weight:bold">${guName}</span>의 선호시설 정도는 <span style="color:yellow">양호</span> 입니다</p>
-            <p><span style="font-weight:bold">${guName}</span>의 편의시설 정도는 <span style="color:green">좋음</span> 입니다</p>
-        </div>
-        <div id='continueBtn' style="text-align:center">
-            <h1>자세히보기로</h1>
+        <div style="display: flex; justify-content: center; align-items:center; height: 100vh;">
+            <img style="display: block;" src="${img_mainLogo}">
         </div>
     `;
     container.innerHTML = template;
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","../../component/headerTab":"cbsqo"}],"g8Qfm":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = ()=>{
-    const routePath = decodeURI(location.hash);
-    var hashArray = routePath.split("/");
-    var guName = hashArray[1];
-    var initialLat = Number(hashArray[2]);
-    var initialLng = Number(hashArray[3]);
-    setTimeout(()=>{
-        const continueBtn = document.getElementById("continueBtn");
-        continueBtn.addEventListener("click", ()=>{
-            location.hash = `#categoryPage/${initialLat}/${initialLng}/${guName}`;
-        });
-    }, 1000);
-};
+},{"ed13de865aa749d3":"6lpKU","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"6lpKU":[function(require,module,exports) {
+module.exports = require("3fb062412c3a04f1").getBundleURL("1G2bZ") + "mainLogo.f6a45e83.webp" + "?" + Date.now();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"1zWMY":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = ()=>{
-    setTimeout(()=>{}, 1000);
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"iunvf":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = ()=>{
-    setTimeout(()=>{
-        let isDragging = false;
-        let dragElement = document.getElementById("bottomSheet");
-        let initialY = 0;
-        let currentY = 0;
-        let targetY = 523; // 목표 위치 (예: 200px)
-        let isReturning = false; // 추가된 변수: 원래 위치로 돌아가는 중인지 여부
-        dragElement.addEventListener("mousedown", startDrag);
-        dragElement.addEventListener("mousemove", drag);
-        dragElement.addEventListener("mouseup", stopDrag);
-        dragElement.addEventListener("click", (event)=>{
-            if (event.target.classList.contains("navcontent")) {
-                event.target.style.backgroundColor = "red";
-                event.target.style.color = "white";
-                const routePath = decodeURI(location.hash);
-                const routeSplit = routePath.split("/");
-                if (routeSplit.length >= 5) {
-                    routeSplit.pop();
-                    routeSplit.push(event.target.innerText);
-                    const path = routeSplit.join("/");
-                    location.hash = path;
-                } else location.hash += "/" + event.target.innerText;
-            }
-            const clickedDiv = event.target.closest(".navcontent");
-            if (clickedDiv) {
-                if (prevClickedDiv) {
-                    // 이전에 클릭한 div를 원래 상태로 되돌립니다.
-                    prevClickedDiv.style.backgroundColor = ""; // 기본 배경색으로 변경
-                    prevClickedDiv.style.color = ""; // 기본 텍스트 색상으로 변경
-                }
-                clickedDiv.style.backgroundColor = "red"; // 클릭한 div의 스타일을 변경합니다.
-                clickedDiv.style.color = "white";
-                // 현재 클릭한 div를 prevClickedDiv 변수에 저장합니다.
-                prevClickedDiv = clickedDiv;
-            }
-        });
-        function startDrag(event) {
-            isDragging = true;
-            if (!isReturning) {
-                initialY = event.clientY;
-                currentY = event.clientY - initialY;
-            }
-            console.log(event.clientY);
-        }
-        function drag(event) {
-            if (isDragging) {
-                if (!isReturning) {
-                    currentY = event.clientY - initialY;
-                    if (currentY < targetY) dragElement.style.transform = `translateY(${currentY}px)`;
-                    else {
-                        dragElement.style.transform = `translateY(${targetY}px)`;
-                        stopDrag();
-                    }
-                }
-            }
-        }
-        function stopDrag() {
-            isDragging = false;
-            if (currentY >= targetY) {
-                isReturning = true;
-                dragElement.style.transform = "translateY(0)";
-            } else initialY = currentY;
-            console.log(initialY, "stop drag initial Y");
-        }
-        let prevClickedDiv = null;
-    }, 1000);
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}]},["luORH","igcvL"], "igcvL", "parcelRequireeb63")
+},{"3fb062412c3a04f1":"jMDco"}]},["luORH","igcvL"], "igcvL", "parcelRequireeb63")
 
 //# sourceMappingURL=index.5baa4167.js.map

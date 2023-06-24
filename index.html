@@ -6,13 +6,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>4조 챗봇</title>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJccPPExvsgFYS9jbUXoJIu4QdmdqGLlM&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:offcallback=initMap"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
 	@import url('commonStyle.css');
 	@import url('/component/bottomTab/bottomStyle.css');
 	@import url('/component/headerTab/headerStyle.css');
 </style>
-
+<!-- 
+	Todo:
+	1. 도로명주소 위도 경도 반환 / 0
+	2. 선호시설 json 지도에 삽입 /
+	3. 선호시설 팝업창 / 
+	4. 구를 동으로 나누어서 거리 걔산 / 0
+	5. 어떤 지역이 제일 합리적인지 계산 / 
+	6. css /
+ -->
 <body style="margin: 0px; padding: 0px;">
 	<noscript>
 		You need to enable JavaScript to run this app.

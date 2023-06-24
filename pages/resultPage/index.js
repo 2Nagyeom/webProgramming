@@ -83,7 +83,7 @@ const img_Gijanggun = new URL(
 
 export default (container) => {
     let template = `
-    <div id='mapResult' style="width:100%; height:85%; justify-content: center;">
+    <div id='mapResult' style="width:100%; height:85%; justify-content: center; margin-top:44px">
     <div id='map'></div>
     </div>
     ${headerTab()}

@@ -1,5 +1,6 @@
 export default (container)=>{
     let template = `
+
         <div>
             <h1>메인페이지</h1>
             ${inputWithTitle('selectBoxToCompany','직장선택')}
@@ -16,9 +17,10 @@ export default (container)=>{
 
 const inputWithTitle = (id,title) =>{
     return `
-        <span>${title}</span>
-        <input id=${id}></input>
-        
+        <div style="display:flex;flex-direction:row;">
+            <span>${title}</span>
+            <div id=${id} style="width:300px;height:60px;border-width:thin;background-color:yellow"></div>
+        </div>
     `
 }
 

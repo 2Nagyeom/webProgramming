@@ -21,7 +21,7 @@ async function router() {
     splashPage(container)
     setTimeout(() => {
       location.hash = '#mainPage';
-    }, 7000);
+    }, 1000);
   }else if(routePath.indexOf('#mainPage') >= 0){
     mainPage(container)
     mainPageLogic()
@@ -41,3 +41,4 @@ window.addEventListener('hashchange', router);
 router();
 
 
+// 
