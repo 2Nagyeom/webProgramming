@@ -13,6 +13,15 @@ import img_Cctvicon from '../../img/icon/cctvicon.png'
 import img_Fastchargericon from '../../img/icon/fastchargericon.png'
 import img_Recentericon from '../../img/icon/recentericon.png'
 import img_Activecentericon from '../../img/icon/activecentericon.png'
+import img_Disabledicon from '../../img/icon/disabledicon.png'
+import img_Eduicon from '../../img/icon/eduicon.png'
+import img_Employicon from '../../img/icon/employicon.png'
+import img_Hearticon from '../../img/icon/hearticon.png'
+import img_Interestsicon from '../../img/icon/interestsicon.png'
+import img_Leisureicon from '../../img/icon/leisureicon.png'
+import img_Organizationicon from '../../img/icon/organizationicon.png'
+import img_Usingicon from '../../img/icon/usingicon.png'
+import img_Nurseryicon from '../../img/icon/nurseryicon.png'
 
 let map;
 let markers = [];
@@ -22,7 +31,7 @@ function makeIcon(json, iconImg) {
         const iconLat = json[i].Latitude
         const iconLng = json[i].Longitude
 
-        var icons = new google.maps.MarkerImage(iconImg);
+        var icons = new google.maps.MarkerImage(iconImg, null, null, null, new google.maps.Size(20,20));
         var marker = new google.maps.Marker({
             position: { lat: Number(iconLat), lng: Number(iconLng) },
             icon: icons,
@@ -61,7 +70,7 @@ function hashDiffIcon() {
         switch (routeSplit[4]) {
             case '치안센터':
                 makeIcon(busan_cctv, img_Cctvicon);
-                document.getElementById('selectList').innerHTML = createSelectList(busan_cctv)
+                document.getElementById('selectList').innerHTML = createSelectList(busan_cctv);
                 break;
             case '범죄발생현황':
                 getColor(busan_gu);
