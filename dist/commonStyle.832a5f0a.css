@@ -8,11 +8,32 @@
 
 .content {
     display: flex;
+    position: relative;
     height: 100%;
     width: 100%;
     max-width: 600px;
     min-width: 365px;
     background-color: white;
+}
+
+#head {
+    height: 10%;
+    width: 100%;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+#bot {
+    height: 10%;
+    width: 100%;
+}
+
+#map{
+    height: 100%;
+    width: 100%;
 }
 
 /*# sourceMappingURL=/commonStyle.832a5f0a.css.map */
