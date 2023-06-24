@@ -1,1 +1,0 @@
-{"version":3,"sources":["component/headerTab/headerStyle.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"headerStyle.c179215e.css","sourceRoot":"..","sourcesContent":[".headbar {\n    background-color: #73B2FB;\n    overflow: hidden;\n    position: absolute;\n    top: 0;\n    width: 100%;\n    height: 6%;\n}\n"]}
