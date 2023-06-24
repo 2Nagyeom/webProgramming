@@ -1,5 +1,6 @@
 import headerTab from "../../component/headerTab";
 import busan_gu from "../../busan_gu.json";
+import nearCenter from "../../선호시설.json"
 
 import img_Junggu from "../../img/junggu.png";
 import img_Seogu from "../../img/seogu.png";
@@ -17,6 +18,9 @@ import img_Yeonjegu from "../../img/yeonjegu.png";
 import img_Suyeonggu from "../../img/suyeonggu.png";
 import img_Sasanggu from "../../img/sasanggu.png";
 import img_Gijanggun from "../../img/gijanggun.png";
+
+import store from "../../store";
+
 
 let map;
 
@@ -73,6 +77,10 @@ function createPolygon(polygonArr, color) {
 }
 
 function getColor(feature) {
+  const { center } = store.getState();
+  console.log(feature.id,'feature.id')
+  console.log(center,'center');
+  console.log(nearCenter,'nearCenter');
   var rating = feature.properties.safety;
   let color;
 

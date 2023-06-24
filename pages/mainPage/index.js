@@ -63,7 +63,7 @@ const inputWithTitle = (id, title) => {
   return `
         <div style="display:flex; flex-direction:column; padding: 95px; align-items: center;justify-content: center;">
             <span style="font-size:24px; font-weight:600;">${title}</span>
-            <div id=${id} style="display:absolute;width:300px;height:30px;border-width:thin;border : 4px solid #73B2FB;margin : 10px"></div>
+            <div id=${id} style="display:flex;width:300px;height:30px;border-width:thin;border:4px solid #73B2FB;margin:10px;align-items:center;justify-content: center;"></div>
         </div>
     `;
 };
