@@ -70,29 +70,42 @@ function hashDiffIcon() {
         switch (routeSplit[4]) {
             case '치안센터':
                 makeIcon(busan_cctv, img_Cctvicon);
-                document.getElementById('selectList').innerHTML = createSelectList(busan_cctv);
+                document.getElementById('selectList').innerHTML = createSelectList(busan_cctv, img_Cctvicon);
                 break;
             case '범죄발생현황':
                 getColor(busan_gu);
                 break;
             case '편의시설':
                 makeIcon(busan_fastCharger, img_Fastchargericon);
+                document.getElementById('selectList').innerHTML = createSelectList(busan_fastCharger, img_Fastchargericon);
                 makeIcon(busan_reCenter, img_Recentericon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_reCenter, img_Recentericon);
                 makeIcon(busan_activeCenter, img_Activecentericon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_activeCenter, img_Activecentericon);
                 break;
             case '의료시설':
                 makeIcon(busan_generalHospital, img_Hospitalicon);
+                document.getElementById('selectList').innerHTML = createSelectList(busan_generalHospital, img_Hospitalicon);
                 break;
             case '선호복지시설':
                 makeIcon(busan_preference, img_Disabledicon);
+                document.getElementById('selectList').innerHTML = createSelectList(busan_preference, img_Disabledicon);
                 makeIcon(busan_preference, img_Eduicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Eduicon);
                 makeIcon(busan_preference, img_Employicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Employicon);
                 makeIcon(busan_preference, img_Hearticon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Hearticon);
                 makeIcon(busan_preference, img_Interestsicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Interestsicon);
                 makeIcon(busan_preference, img_Leisureicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Leisureicon);
                 makeIcon(busan_preference, img_Organizationicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Organizationicon);
                 makeIcon(busan_preference, img_Usingicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Usingicon);
                 makeIcon(busan_preference, img_Nurseryicon);
+                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Nurseryicon);
                 break;
             default:
                 break;

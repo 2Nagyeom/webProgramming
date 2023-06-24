@@ -1,11 +1,3 @@
-import busan_generalHospital from "../../busan_generalHospital.json";
-import busan_gu from "../../busan_gu.json"
-import busan_cctv from "../../busan_cctv.json";
-import busan_fastCharger from "../../busan_fastCharger.json";
-import busan_reCenter from "../../busan_recenter.json";
-import busan_activeCenter from "../../busan_activecenter.json";
-import img_Cctvicon from '../../img/icon/cctvicon.png'
-
 export default function bottomTab() {
   let template = `
     <div id="bottomSheet" class="navbar">
@@ -36,14 +28,14 @@ export default function bottomTab() {
   return template
 }
 
-export const createSelectList = (dataArray = []) =>{
+export const createSelectList = (dataArray = [], iconImg) =>{
   return`
     ${dataArray.map((value,index)=>{
       return `
       <li>
-      <img style="width:50px;height:50px" src="${img_Cctvicon}" >
+        <img style="width:50px;height:50px" src="${iconImg}" >
         <span style="font-size:20px; font-weight:600;">${value.name}</span>
-        <span>${value.소재지지번주소}</span>
+        <span style="display:flex;padding-left:55px;padding-top:10px">${value.소재지지번주소}</span>
       </li>`
     })}
   `
