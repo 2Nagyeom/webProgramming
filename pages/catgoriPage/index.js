@@ -8,11 +8,11 @@ import busan_preference from "../../선호시설.json";
 import bottomTab, { createSelectList } from "../../component/bottomTab";
 import headerTab from "../../component/headerTab";
 
-import img_Hospitalicon from '../../img/hospital_ping.png'
-import img_Cctvicon from '../../img/cctv.png'
-import img_Fastchargericon from '../../img/fastcharger.png'
-import img_Recentericon from '../../img/recenter.png'
-import img_Activecentericon from '../../img/activecenter.png'
+import img_Hospitalicon from '../../img/icon/hospitalicon.png'
+import img_Cctvicon from '../../img/icon/cctvicon.png'
+import img_Fastchargericon from '../../img/icon/fastchargericon.png'
+import img_Recentericon from '../../img/icon/recentericon.png'
+import img_Activecentericon from '../../img/icon/activecentericon.png'
 
 let map;
 let markers = [];
