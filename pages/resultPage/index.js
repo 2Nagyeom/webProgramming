@@ -20,6 +20,26 @@ import img_Sasanggu from "../../img/sasanggu.png";
 import img_Gijanggun from "../../img/gijanggun.png";
 
 import store from "../../store";
+import { getDiffDistance } from "../../getDiffDistance";
+
+const locations = {
+  중구: { lat: 35.10644444444444, lng: 129.0305 },
+  서구: { lat: 35.08004472650553, lng: 129.01415942028981 },
+  동구: { lat: 35.12830769230769, lng: 129.04597435897435 },
+  영도구: { lat: 35.073854545454545, lng: 129.06974545454545 },
+  부산진구: { lat: 35.156014492753625, lng: 129.0465072463768 },
+  동래구: { lat: 35.20005925925926, lng: 129.08222222222219 },
+  남구: { lat: 35.11572580645162, lng: 129.09545161290322 },
+  북구: { lat: 35.22001408450705, lng: 129.02711267605632 },
+  해운대구: { lat: 35.17927083333334, lng: 129.1547604166667 },
+  사하구: { lat: 35.08550000000001, lng: 128.98085576923074 },
+  연제구: { lat: 35.17546551724138, lng: 129.08129310344825 },
+  사상구: { lat: 35.150968749999995, lng: 128.98760937499997 },
+  수영구: { lat: 35.15090697674418, lng: 129.11220930232557 },
+  금정구: { lat: 35.246705882352946, lng: 129.09040196078433 },
+  강서구: { lat: 35.1593, lng: 128.933 },
+  기장군: { lat: 35.29200423728813, lng: 129.19918644067804 },
+};
 
 
 let map;
@@ -48,6 +68,7 @@ function initMap() {
 }
 
 function initPolygons() {
+  let { companyX, companyY } = store.getState()
   for (var i = 0; i < busan_gu.features.length; i++) {
     const geoObj = busan_gu.features[i].geometry.coordinates[0].map(
       (value, index) => {
@@ -58,7 +79,7 @@ function initPolygons() {
       }
     );
 
-    const color = getColor(busan_gu.features[i]);
+    const color = getColor(busan_gu.features[i],companyX,companyY);
 
     createPolygon(geoObj, color);
   }
@@ -76,21 +97,36 @@ function createPolygon(polygonArr, color) {
   polygon.setMap(map);
 }
 
-function getColor(feature) {
-  const { center } = store.getState();
+function getColor(feature,companyX,companyY) {
+  const { center = [] } = store.getState();
   console.log(feature.id,'feature.id')
   console.log(center,'center');
-  console.log(nearCenter,'nearCenter');
-  var rating = feature.properties.safety;
-  let color;
+  let nearCenterFilter = nearCenter.filter((value) => {
+    let addr = value.주소1 +' '+ value.주소2;
+    return center.includes(value.분류1) && addr.includes(feature.id);
+  });
 
-  if (rating < 7) {
+  let diffDistance = getDiffDistance(companyY,companyX,locations[feature.id].lat,locations[feature.id].lng)
+  let nearCenterFilterLength = nearCenterFilter.length;
+  let safetyRating = 0;
+
+  console.log(nearCenterFilterLength,'nearCenterFilterLength');
+  console.log(diffDistance,'diffDistance');
+  
+  let safety = feature?.properties?.safety;
+  let color = 'lightgreen';
+
+  if (safety < 7) {
+    safetyRating = 3;
     color = "lightgreen";
-  } else if (rating < 10) {
+  } else if (safety < 10) {
+    safetyRating = 2;
     color = "yellow";
-  } else if (rating < 13) {
+  } else if (safety < 13) {
+    safetyRating = 1;
     color = "orange";
   } else {
+    safetyRating = 0;
     color = "red";
   }
 

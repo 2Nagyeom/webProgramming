@@ -1,22 +1,23 @@
 export function getDiffDistance(lat1, lon1, lat2, lon2) {
-    function toRad(degrees) {
-      return (degrees * Math.PI) / 180;
-    }
-  
-    const R = 6371000; // 지구의 평균 반지름 (m)
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-  
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-  
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-  
-    return distance;
-  }
-  
+  lat1 = Number(lat1)
+  lon1 = Number(lon1)
+  lat2 = Number(lat2)
+  lon2 = Number(lon2)
+
+  console.log(lat1, lon1, lat2, lon2);
+
+  const R = 6371; // 지구 반지름 (단위: km)
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const distance = R * c; // 두 지점 간의 거리 (단위: km)
+  return distance;
+}
+
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180);
+}
