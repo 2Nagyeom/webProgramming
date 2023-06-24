@@ -4,31 +4,77 @@ import busan_cctv from "../../busan_cctv.json";
 import busan_fastCharger from "../../busan_fastCharger.json";
 import busan_reCenter from "../../busan_recenter.json";
 import busan_activeCenter from "../../busan_activecenter.json";
+import busan_preference from "../../선호시설.json";
 import bottomTab, { createSelectList } from "../../component/bottomTab";
 import headerTab from "../../component/headerTab";
 
 const img_Hospitalicon = new URL(
-    '../../img/hospital_ping.png?as=webp&width=40',
+    '../../img/icon/hospitalicon.png?as=webp&width=40',
     import.meta.url
 )
 
 const img_Cctvicon = new URL(
-    '../../img/cctv.png?as=webp&width=20',
+    '../../img/icon/cctvicon.png?as=webp&width=20',
     import.meta.url
 )
 
 const img_Fastchargericon = new URL(
-    '../../img/fastcharger.png?as=webp&width=40',
+    '../../img/icon/fastchargericon.png?as=webp&width=40',
     import.meta.url
 )
 
 const img_Recentericon = new URL(
-    '../../img/recenter.png?as=webp&width=40',
+    '../../img/icon/recentericon.png?as=webp&width=40',
     import.meta.url
 )
 
 const img_Activecentericon = new URL(
-    '../../img/activecenter.png?as=webp&width=40',
+    '../../img/icon/activecentericon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Disabledicon = new URL(
+    '../../img/icon/disabledicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Eduicon = new URL(
+    '../../img/icon/eduicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Employicon = new URL(
+    '../../img/icon/employicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Hearticon = new URL(
+    '../../img/icon/hearticon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Interestsicon = new URL(
+    '../../img/icon/interestsicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Leisureicon = new URL(
+    '../../img/icon/leisureicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Nurseryicon = new URL(
+    '../../img/icon/nurseryicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Organizationicon = new URL(
+    '../../img/icon/organizationicon.png?as=webp&width=40',
+    import.meta.url
+)
+
+const img_Usingicon = new URL(
+    '../../img/icon/usingicon.png?as=webp&width=40',
     import.meta.url
 )
 
@@ -92,12 +138,18 @@ function hashDiffIcon() {
             case '의료시설':
                 makeIcon(busan_generalHospital, img_Hospitalicon.href);
                 break;
-            case '선호시설':
-                // makeIcon(busan_cctv, img_Cctvicon.href);
+            case '선호복지시설':
+                makeIcon(busan_preference, img_Disabledicon.href);
+                makeIcon(busan_preference, img_Eduicon.href);
+                makeIcon(busan_preference, img_Employicon.href);
+                makeIcon(busan_preference, img_Hearticon.href);
+                makeIcon(busan_preference, img_Interestsicon.href);
+                makeIcon(busan_preference, img_Leisureicon.href);
+                makeIcon(busan_preference, img_Organizationicon.href);
+                makeIcon(busan_preference, img_Usingicon.href);
+                makeIcon(busan_preference, img_Nurseryicon.href);
                 break;
             default:
-                makeIcon(busan_generalHospital, img_Hospitalicon.href);
-                makeIcon(busan_cctv, img_Cctvicon.href);
                 break;
         }
 
