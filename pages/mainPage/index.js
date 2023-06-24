@@ -17,11 +17,10 @@ export default (container) => {
   let template = `
     <div>
     ${headerTab()}
-
-    <h2 style="padding :100px">${inputWithTitle("selectBoxToCompany", "직장을 선택해주세요!")}</h2>
-    <h2 style="padding :100px">${inputWithTitle("selectBoxToCenter", "원하는 시설을 골라주세요!")}</h2>
-      <div id='mainPageResultBtn'>
-        <h3>결과보기</h3>
+    ${inputWithTitle("selectBoxToCompany", "직장을 선택해주세요!")}
+    ${inputWithTitle("selectBoxToCenter", "원하는 시설을 골라주세요!")}
+      <div id='mainPageResultBtn' style="background-color :#73B2FB;display:flex; align-items: center;position: absolute;justify-content: center;width:100%;bottom:0;border-radius: 10px 10px 0px 0px;">
+        <h3 style="">결과보기</h3>
       </div>
       <div id='likePlaceSelectModal' style="position:absolute;top:20vh;left:10%;width:80%;height:300px;background-color:lightgray;display:none;border-radius: 40px;">
         <div style="display:flex;justify-content:space-between;padding:3% 5% 3% 5%">
@@ -62,9 +61,9 @@ const selectBox = (id, text) => {
 
 const inputWithTitle = (id, title) => {
   return `
-        <div style="display:flex;flex-direction:row;">
-            <span>${title}</span>
-            <div id=${id} style="width:300px;height:30px;border-width:thin;border : 4px solid #73B2FB;margin : 10px"></div>
+        <div style="display:flex; flex-direction:column; padding: 95px; align-items: center;justify-content: center;">
+            <span style="font-size:24px; font-weight:600;">${title}</span>
+            <div id=${id} style="display:absolute;width:300px;height:30px;border-width:thin;border : 4px solid #73B2FB;margin : 10px"></div>
         </div>
     `;
 };
