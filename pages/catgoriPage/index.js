@@ -8,75 +8,11 @@ import busan_preference from "../../선호시설.json";
 import bottomTab, { createSelectList } from "../../component/bottomTab";
 import headerTab from "../../component/headerTab";
 
-const img_Hospitalicon = new URL(
-    '../../img/icon/hospitalicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Cctvicon = new URL(
-    '../../img/icon/cctvicon.png?as=webp&width=20',
-    import.meta.url
-)
-
-const img_Fastchargericon = new URL(
-    '../../img/icon/fastchargericon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Recentericon = new URL(
-    '../../img/icon/recentericon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Activecentericon = new URL(
-    '../../img/icon/activecentericon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Disabledicon = new URL(
-    '../../img/icon/disabledicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Eduicon = new URL(
-    '../../img/icon/eduicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Employicon = new URL(
-    '../../img/icon/employicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Hearticon = new URL(
-    '../../img/icon/hearticon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Interestsicon = new URL(
-    '../../img/icon/interestsicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Leisureicon = new URL(
-    '../../img/icon/leisureicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Nurseryicon = new URL(
-    '../../img/icon/nurseryicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Organizationicon = new URL(
-    '../../img/icon/organizationicon.png?as=webp&width=40',
-    import.meta.url
-)
-
-const img_Usingicon = new URL(
-    '../../img/icon/usingicon.png?as=webp&width=40',
-    import.meta.url
-)
+import img_Hospitalicon from '../../img/hospital_ping.png'
+import img_Cctvicon from '../../img/cctv.png'
+import img_Fastchargericon from '../../img/fastcharger.png'
+import img_Recentericon from '../../img/recenter.png'
+import img_Activecentericon from '../../img/activecenter.png'
 
 let map;
 let markers = [];
@@ -124,30 +60,30 @@ function hashDiffIcon() {
         deleteMarkers();
         switch (routeSplit[4]) {
             case '치안센터':
-                makeIcon(busan_cctv, img_Cctvicon.href);
+                makeIcon(busan_cctv, img_Cctvicon);
                 document.getElementById('selectList').innerHTML = createSelectList(busan_cctv)
                 break;
             case '범죄발생현황':
                 getColor(busan_gu);
                 break;
             case '편의시설':
-                makeIcon(busan_fastCharger, img_Fastchargericon.href);
-                makeIcon(busan_reCenter, img_Recentericon.href);
-                makeIcon(busan_activeCenter, img_Activecentericon.href);
+                makeIcon(busan_fastCharger, img_Fastchargericon);
+                makeIcon(busan_reCenter, img_Recentericon);
+                makeIcon(busan_activeCenter, img_Activecentericon);
                 break;
             case '의료시설':
-                makeIcon(busan_generalHospital, img_Hospitalicon.href);
+                makeIcon(busan_generalHospital, img_Hospitalicon);
                 break;
             case '선호복지시설':
-                makeIcon(busan_preference, img_Disabledicon.href);
-                makeIcon(busan_preference, img_Eduicon.href);
-                makeIcon(busan_preference, img_Employicon.href);
-                makeIcon(busan_preference, img_Hearticon.href);
-                makeIcon(busan_preference, img_Interestsicon.href);
-                makeIcon(busan_preference, img_Leisureicon.href);
-                makeIcon(busan_preference, img_Organizationicon.href);
-                makeIcon(busan_preference, img_Usingicon.href);
-                makeIcon(busan_preference, img_Nurseryicon.href);
+                makeIcon(busan_preference, img_Disabledicon);
+                makeIcon(busan_preference, img_Eduicon);
+                makeIcon(busan_preference, img_Employicon);
+                makeIcon(busan_preference, img_Hearticon);
+                makeIcon(busan_preference, img_Interestsicon);
+                makeIcon(busan_preference, img_Leisureicon);
+                makeIcon(busan_preference, img_Organizationicon);
+                makeIcon(busan_preference, img_Usingicon);
+                makeIcon(busan_preference, img_Nurseryicon);
                 break;
             default:
                 break;
