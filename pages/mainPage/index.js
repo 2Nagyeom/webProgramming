@@ -40,8 +40,6 @@ export default (container) => {
 
   container.innerHTML = template;
 
-  const { center } = store.getState();
-
   store.subScrip(() => {
     const getStateCenter = store.getState().center;
     const selectBoxToCenter = document.getElementById("selectBoxToCenter");

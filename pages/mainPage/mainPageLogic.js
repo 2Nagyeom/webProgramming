@@ -77,5 +77,5 @@ export default () => {
         store.dispatcher({ type: "setCenter", param: v });
       });
     });
-  }, 1000);
+  }, 200);
 };
