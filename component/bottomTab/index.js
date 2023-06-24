@@ -4,6 +4,7 @@ import busan_cctv from "../../busan_cctv.json";
 import busan_fastCharger from "../../busan_fastCharger.json";
 import busan_reCenter from "../../busan_recenter.json";
 import busan_activeCenter from "../../busan_activecenter.json";
+import img_Cctvicon from '../../img/icon/cctvicon.png'
 
 export default function bottomTab() {
   let template = `
@@ -40,7 +41,8 @@ export const createSelectList = (dataArray = []) =>{
     ${dataArray.map((value,index)=>{
       return `
       <li>
-        <span>${value.name}</span>
+      <img style="width:50px;height:50px" src="${img_Cctvicon}" >
+        <span style="font-size:20px; font-weight:600;">${value.name}</span>
         <span>${value.소재지지번주소}</span>
       </li>`
     })}
