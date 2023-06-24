@@ -21,11 +21,11 @@ import img_Gijanggun from "../../img/gijanggun.png";
 let map;
 
 export default (container) => {
-  let template = `
-    <div id='mapResult' style="width:100%; height:85%; justify-content: center; margin-top:44px">
-      <div id='map'></div>
-    </div>
+    let template = `
     ${headerTab()}
+    <div id='mapResult' style="width:100%; height:85%; justify-content: center;">
+    <div id='map'></div>
+    </div>
     `;
   container.innerHTML = template;
   setTimeout(() => {
