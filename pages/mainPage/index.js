@@ -1,5 +1,16 @@
-const nearCenterArr =['고용', '관련유관단체', '권익', '보육/교육', '복지관', '여가/문화', '의료/건강', '이용시설', '장애인단체'] 
+import store from "../../store";
 
+const nearCenterArr = [
+  "고용",
+  "관련유관단체",
+  "권익",
+  "보육/교육",
+  "복지관",
+  "여가/문화",
+  "의료/건강",
+  "이용시설",
+  "장애인단체",
+];
 
 export default (container) => {
   let template = `
@@ -17,7 +28,9 @@ export default (container) => {
         </div>
         <div style="height:100%;overflow-y:auto">
           <div style="display:flex;flex-direction:column;">
-            ${nearCenterArr.map((v,i)=>selectBox('selectBox_'+i,v)).join('')}
+            ${nearCenterArr
+              .map((v, i) => selectBox("selectBox_" + i, v))
+              .join("")}
           </div>
         </div>
       </div>
@@ -25,6 +38,15 @@ export default (container) => {
   `;
 
   container.innerHTML = template;
+
+  const { center } = store.getState();
+
+  store.subScrip(() => {
+    const getStateCenter = store.getState().center;
+    const selectBoxToCenter = document.getElementById("selectBoxToCenter");
+    selectBoxToCenter.innerText = getStateCenter.join(", ");
+  });
+
   return null;
 };
 
@@ -40,7 +62,7 @@ const inputWithTitle = (id, title) => {
   return `
         <div style="display:flex;flex-direction:row;">
             <span>${title}</span>
-            <div id=${id} style="width:300px;height:60px;border-width:thin;background-color:yellow"></div>
+            <div id=${id} style="width:300px;height:30px;border-width:thin;background-color:yellow;padding:3%;"></div>
         </div>
     `;
 };

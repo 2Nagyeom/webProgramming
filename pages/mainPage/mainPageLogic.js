@@ -73,7 +73,6 @@ export default () => {
     nearCenterArr.forEach((v, i) => {
       const selectBox = document.getElementById("selectBox_" + i);
       selectBox.addEventListener("click", () => {
-        console.log("selectBox_" + i, v);
         selectBox.style.backgroundColor = "skyblue";
         store.dispatcher({ type: "setCenter", param: v });
       });
