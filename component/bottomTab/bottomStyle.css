@@ -39,21 +39,22 @@
     display: flex;
   }
 
-ul.selectList li::before {
-    content: "";
-  }
-
 .selectList{
     width: 100%;
     padding-left: 0px;
 }
 
+.contentslist li:first-child{
+    margin-bottom: 20px;
+}
+
 .contentslist li{
     border-bottom: 1px solid rgb(170, 170, 170);
     margin-bottom: 20px;
-    margin-top: 10px;
-
 }
+
+
+
   
 
 

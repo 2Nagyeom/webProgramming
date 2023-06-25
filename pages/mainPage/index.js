@@ -41,9 +41,11 @@ export default (container) => {
   container.innerHTML = template;
 
   store.subScrip(() => {
-    const getStateCenter = store.getState().center;
+    const {center = ''} = store.getState();
     const selectBoxToCenter = document.getElementById("selectBoxToCenter");
-    selectBoxToCenter.innerText = getStateCenter.join(", ");
+    if(selectBoxToCenter){
+      selectBoxToCenter.innerText = center.join(", ");
+    }
   });
 
   return null;

@@ -7,6 +7,7 @@ const store = () => {
   }
 
   function dispatcher(action) {
+    console.log(action,'dispatcher');
     state = dispatch(state, action);
     subScripArr.forEach((value) => value());
   }
@@ -23,6 +24,7 @@ const initialState = {
   companyY: null,
   center: [],
   resultRating: [],
+  resultRatingText: [], 
 };
 
 const dispatch = (state = initialState, action) => {
@@ -37,6 +39,8 @@ const dispatch = (state = initialState, action) => {
       return { ...state, center: [...state.center, action.param] };
     case "setResultRating":
       return { ...state, resultRating: [...action.param] };
+    case "setResultRatingText":
+      return { ...state, resultRatingText: [...action.param] };
     default:
       break;
   }

@@ -41,6 +41,44 @@ const locations = {
   기장군: { lat: 35.29200423728813, lng: 129.19918644067804 },
 };
 
+let resultObjArr = {
+  중구: [],
+  서구: [],
+  동구: [],
+  영도구: [],
+  부산진구: [],
+  동래구: [],
+  남구: [],
+  북구: [],
+  해운대구: [],
+  사하구: [],
+  연제구: [],
+  사상구: [],
+  수영구: [],
+  금정구: [],
+  강서구: [],
+  기장군: [],
+}
+
+let resultTextObjArr ={
+  중구: [],
+  서구: [],
+  동구: [],
+  영도구: [],
+  부산진구: [],
+  동래구: [],
+  남구: [],
+  북구: [],
+  해운대구: [],
+  사하구: [],
+  연제구: [],
+  사상구: [],
+  수영구: [],
+  금정구: [],
+  강서구: [],
+  기장군: [],
+}
+
 
 let map;
 
@@ -97,9 +135,10 @@ function createPolygon(polygonArr, color) {
   polygon.setMap(map);
 }
 
-function getColor(feature,companyX,companyY,isRating = false) {
+function getColor(feature,companyX,companyY) {
   const { center = [] } = store.getState();
   const resultRatingArr = [];
+  const resultRatingArrText = [];
 
   let nearCenterFilter = nearCenter.filter((value) => {
     let addr = value.주소1 +' '+ value.주소2;
@@ -110,41 +149,73 @@ function getColor(feature,companyX,companyY,isRating = false) {
     let addr = value.주소1 +' '+ value.주소2;
     return addr.includes(feature.id);
   });
-
+  
   let diffDistance = getDiffDistance(companyY,companyX,locations[feature.id].lat,locations[feature.id].lng)
   let nearCenterFilterLength = nearCenterFilter.length;
   let resultRating = 0;
   
   let safety = feature?.properties?.safety;
   let color = 'lightgreen';
-
-  if (safety < 7) {
-    resultRating = 3;
-  } else if (safety < 10) {
-    resultRating = 2;
-  } else if (safety < 13) {
-    resultRating = 1;
-  } else {
-    resultRating = 0;
-  }
-  
-  if (nearCenterFilterLength > 20) {
-    resultRating += 5;
-  } else if (nearCenterFilterLength > 10) {
-    resultRating += 3;
-  } else if (nearCenterFilterLength > 5) {
-    resultRating += 1;
-  }
   
   if (diffDistance < 5) {
     resultRating += 15;
+    resultRatingArr.push(Number(15));
+    resultRatingArrText.push('매우 좋음')
   } else if (diffDistance < 10) {
     resultRating += 10;
+    resultRatingArr.push(Number(10));
+    resultRatingArrText.push('좋음')
   } else if (diffDistance < 15) {
     resultRating += 7;
+    resultRatingArr.push(Number(7));
+    resultRatingArrText.push('보통')
   } else if (diffDistance < 20) {
     resultRating += 3;
+    resultRatingArr.push(Number(3));
+    resultRatingArrText.push('나쁨')
+  } else{
+    resultRating += 1
+    resultRatingArr.push(Number(1));
+    resultRatingArrText.push('매우 나쁨')
   }
+  
+  if (safety < 7) {
+    resultRating += 3;
+    resultRatingArrText.push('매우 좋음')
+  } else if (safety < 10) {
+    resultRating += 2;
+    resultRatingArrText.push('좋음')
+  } else if (safety < 13) {
+    resultRating += 1;
+    resultRatingArrText.push('나쁨')
+  } else {
+    resultRating += 0;
+    resultRatingArrText.push('매우 나쁨')
+  }
+  
+  if (nearCenterFilterLength > 8) {
+    resultRating += 5;
+    resultRatingArrText.push('매우 좋음')
+  } else if (nearCenterFilterLength > 4) {
+    resultRatingArrText.push('좋음')
+    resultRating += 3;
+  } else if (nearCenterFilterLength > 2) {
+    resultRatingArrText.push('보통')
+    resultRating += 1;
+  } else{
+    resultRatingArrText.push('나쁨')
+  }
+
+  if (guCenterFilter.length > 8) {
+    resultRatingArrText.push('매우 좋음')
+  } else if (guCenterFilter.length > 4) {
+    resultRatingArrText.push('좋음')
+  } else if (guCenterFilter.length > 2) {
+    resultRatingArrText.push('보통')
+  } else{
+    resultRatingArrText.push('나쁨')
+  }
+  
   
   if(resultRating > 15){
     color = 'lightgreen';
@@ -155,14 +226,13 @@ function getColor(feature,companyX,companyY,isRating = false) {
   }else{
     color = 'red';
   }
-  if(isRating){
-    resultRatingArr.push(diffDistance);
-    resultRatingArr.push(safety);
-    resultRatingArr.push(nearCenterFilterLength);
-    resultRatingArr.push(guCenterFilter.length);
 
-    return resultRatingArr;
-  }    
+  resultRatingArr.push(Number(safety));
+  resultRatingArr.push(Number(nearCenterFilterLength));
+  resultRatingArr.push(Number(guCenterFilter.length));
+  
+  resultObjArr = {...resultObjArr,[feature.id]:resultRatingArr}
+  resultTextObjArr ={...resultTextObjArr,[feature.id]:resultRatingArrText}
 
   return color;
 }
@@ -184,15 +254,19 @@ function makeMarker(
     map,
     icon,
   });
-  let { companyX, companyY } = store.getState()
 
   marker.addListener("click", () => {
     console.log(title);
-    goToResultDetail(title, position.lat, position.lng);
+
     store.dispatcher({
       type: "setResultRating",
-      param: getColor(title,companyX,companyY,true),
+      param: resultObjArr[title],
     });
+    store.dispatcher({
+      type: "setResultRatingText",
+      param: resultTextObjArr[title],
+    });
+    goToResultDetail(title, position.lat, position.lng);
     callback();
   });
 

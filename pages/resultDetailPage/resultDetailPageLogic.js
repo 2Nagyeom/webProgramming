@@ -16,6 +16,7 @@ export default () => {
     });
 
     const { resultRating = [] } = store.getState();
+    console.log(resultRating,'resultRating');
     var dom = document.getElementById("chart-container");
     var myChart = echarts.init(dom, null, {
       renderer: "canvas",
@@ -26,16 +27,16 @@ export default () => {
       title: {
         text: "종합지수차트",
       },
-      legend: {// 치안, 거리, 선호시설, 그 외 복지시설
+      legend: {
         data: ["거리", "치안 안전 점수", "선호 시설", "그외 복지 시설"],
       },
       radar: {
         // shape: 'circle',
         indicator: [
-          { name: "거리", max: 40 },
+          { name: "거리", max: 15 },
           { name: "치안 안전 점수", max: 10 },
-          { name: "선호 시설", max: 50 },
-          { name: "그외 복지 시설", max: 50 },
+          { name: "선호 시설", max: 10 },
+          { name: "그외 복지 시설", max: 10 },
         ],
       },
       series: [
