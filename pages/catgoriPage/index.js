@@ -22,6 +22,7 @@ import img_Leisureicon from '../../img/icon/leisureicon.png'
 import img_Organizationicon from '../../img/icon/organizationicon.png'
 import img_Usingicon from '../../img/icon/usingicon.png'
 import img_Nurseryicon from '../../img/icon/nurseryicon.png'
+import store from "../../store";
 
 let map;
 let markers = [];
@@ -62,9 +63,46 @@ function deleteMarkers() {
 
 }
 
+function classifyPreference() {
+    const 고용 = busan_preference.filter((value) => value.분류1 === '고용')
+    const 관련유관단체 = busan_preference.filter((value) => value.분류1 === '관련유관단체')
+    const 권익 = busan_preference.filter((value) => value.분류1 === '권익')
+    const 보육교육 = busan_preference.filter((value) => value.분류1 === '보육/교육')
+    const 복지관 = busan_preference.filter((value) => value.분류1 === '복지관')
+    const 여가문화 = busan_preference.filter((value) => value.분류1 === '여가/문화')
+    const 의료건강 = busan_preference.filter((value) => value.분류1 === '의료/건강')
+    const 이용시설 = busan_preference.filter((value) => value.분류1 === '이용시설')
+    const 장애인단체 = busan_preference.filter((value) => value.분류1 === '장애인단체')
+
+    return {
+        고용,
+        관련유관단체,
+        권익,
+        보육교육,
+        복지관,
+        여가문화,
+        의료건강,
+        이용시설,
+        장애인단체,
+    }
+}
+
 function hashDiffIcon() {
     const routePath = decodeURI(location.hash);
     const routeSplit = routePath.split('/')
+
+    const {
+        고용,
+        관련유관단체,
+        권익,
+        보육교육,
+        복지관,
+        여가문화,
+        의료건강,
+        이용시설,
+        장애인단체,
+    } = classifyPreference()
+    const { center = [] } = store.getState()
     if (routeSplit.length >= 5) {
         deleteMarkers();
         switch (routeSplit[4]) {
@@ -88,24 +126,49 @@ function hashDiffIcon() {
                 document.getElementById('selectList').innerHTML = createSelectList(busan_generalHospital, img_Hospitalicon);
                 break;
             case '선호복지시설':
-                makeIcon(busan_preference, img_Disabledicon);
-                document.getElementById('selectList').innerHTML = createSelectList(busan_preference, img_Disabledicon);
-                makeIcon(busan_preference, img_Eduicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Eduicon);
-                makeIcon(busan_preference, img_Employicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Employicon);
-                makeIcon(busan_preference, img_Hearticon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Hearticon);
-                makeIcon(busan_preference, img_Interestsicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Interestsicon);
-                makeIcon(busan_preference, img_Leisureicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Leisureicon);
-                makeIcon(busan_preference, img_Organizationicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Organizationicon);
-                makeIcon(busan_preference, img_Usingicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Usingicon);
-                makeIcon(busan_preference, img_Nurseryicon);
-                document.getElementById('selectList').innerHTML += createSelectList(busan_preference, img_Nurseryicon);
+                document.getElementById('selectList').innerHTML = '';
+                center.forEach((value) => {
+                    switch (value) {
+                        case '고용':
+                            makeIcon(고용, img_Employicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(고용, img_Employicon);
+                            break;
+                        case '관련유관단체':
+                            makeIcon(관련유관단체, img_Organizationicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(관련유관단체, img_Organizationicon);
+                            break;
+                        case '권익':
+                            makeIcon(권익, img_Interestsicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(권익, img_Interestsicon);
+                            break;
+                        case '보육/교육':
+                            makeIcon(보육교육, img_Eduicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(보육교육, img_Eduicon);
+                            break;
+                        case '복지관':
+                            makeIcon(복지관, img_Hearticon);
+                            document.getElementById('selectList').innerHTML += createSelectList(복지관, img_Hearticon);
+                            break;
+                        case '여가/문화':
+                            makeIcon(여가문화, img_Leisureicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(여가문화, img_Leisureicon);
+                            break;
+                        case '의료/건강':
+                            makeIcon(의료건강, img_Nurseryicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(의료건강, img_Nurseryicon);
+                            break;
+                        case '이용시설':
+                            makeIcon(이용시설, img_Usingicon);
+                            document.getElementById('selectList').innerHTML += createSelectList(이용시설, img_Usingicon);
+                            break;
+                        case '장애인단체':
+                            makeIcon(장애인단체, img_Disabledicon);
+                            document.getElementById('selectList').innerHTML = createSelectList(장애인단체, img_Disabledicon);
+                            break;
+                        default:
+                            break;
+                    }
+                })
                 break;
             default:
                 break;

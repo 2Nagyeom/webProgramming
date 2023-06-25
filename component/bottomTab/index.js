@@ -29,7 +29,7 @@ export default function bottomTab() {
 }
 
 export const createSelectList = (dataArray = [], iconImg) =>{
-  return`
+  return `
     ${dataArray.map((value,index)=>{
       return `
         <li style="padding-left:20px;">
