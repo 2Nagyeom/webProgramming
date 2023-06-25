@@ -22,6 +22,7 @@ const initialState = {
   companyX: null,
   companyY: null,
   center: [],
+  resultRating: [],
 };
 
 const dispatch = (state = initialState, action) => {
@@ -34,6 +35,8 @@ const dispatch = (state = initialState, action) => {
       };
     case "setCenter":
       return { ...state, center: [...state.center, action.param] };
+    case "setResultRating":
+      return { ...state, resultRating: [...action.param] };
     default:
       break;
   }

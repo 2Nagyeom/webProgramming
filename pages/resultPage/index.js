@@ -97,38 +97,72 @@ function createPolygon(polygonArr, color) {
   polygon.setMap(map);
 }
 
-function getColor(feature,companyX,companyY) {
+function getColor(feature,companyX,companyY,isRating = false) {
   const { center = [] } = store.getState();
-  console.log(feature.id,'feature.id')
-  console.log(center,'center');
+  const resultRatingArr = [];
+
   let nearCenterFilter = nearCenter.filter((value) => {
     let addr = value.주소1 +' '+ value.주소2;
     return center.includes(value.분류1) && addr.includes(feature.id);
   });
 
+  let guCenterFilter =nearCenter.filter((value) => {
+    let addr = value.주소1 +' '+ value.주소2;
+    return addr.includes(feature.id);
+  });
+
   let diffDistance = getDiffDistance(companyY,companyX,locations[feature.id].lat,locations[feature.id].lng)
   let nearCenterFilterLength = nearCenterFilter.length;
-  let safetyRating = 0;
-
-  console.log(nearCenterFilterLength,'nearCenterFilterLength');
-  console.log(diffDistance,'diffDistance');
+  let resultRating = 0;
   
   let safety = feature?.properties?.safety;
   let color = 'lightgreen';
 
   if (safety < 7) {
-    safetyRating = 3;
-    color = "lightgreen";
+    resultRating = 3;
   } else if (safety < 10) {
-    safetyRating = 2;
-    color = "yellow";
+    resultRating = 2;
   } else if (safety < 13) {
-    safetyRating = 1;
-    color = "orange";
+    resultRating = 1;
   } else {
-    safetyRating = 0;
-    color = "red";
+    resultRating = 0;
   }
+  
+  if (nearCenterFilterLength > 20) {
+    resultRating += 5;
+  } else if (nearCenterFilterLength > 10) {
+    resultRating += 3;
+  } else if (nearCenterFilterLength > 5) {
+    resultRating += 1;
+  }
+  
+  if (diffDistance < 5) {
+    resultRating += 15;
+  } else if (diffDistance < 10) {
+    resultRating += 10;
+  } else if (diffDistance < 15) {
+    resultRating += 7;
+  } else if (diffDistance < 20) {
+    resultRating += 3;
+  }
+  
+  if(resultRating > 15){
+    color = 'lightgreen';
+  }else if(resultRating > 10){
+    color = 'yellow';
+  }else if(resultRating > 5){
+    color = 'orange';
+  }else{
+    color = 'red';
+  }
+  if(isRating){
+    resultRatingArr.push(diffDistance);
+    resultRatingArr.push(safety);
+    resultRatingArr.push(nearCenterFilterLength);
+    resultRatingArr.push(guCenterFilter.length);
+
+    return resultRatingArr;
+  }    
 
   return color;
 }
@@ -150,10 +184,15 @@ function makeMarker(
     map,
     icon,
   });
+  let { companyX, companyY } = store.getState()
 
   marker.addListener("click", () => {
     console.log(title);
     goToResultDetail(title, position.lat, position.lng);
+    store.dispatcher({
+      type: "setResultRating",
+      param: getColor(title,companyX,companyY,true),
+    });
     callback();
   });
 
