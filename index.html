@@ -5,15 +5,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>거주시설 추천앱</title>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJccPPExvsgFYS9jbUXoJIu4QdmdqGLlM&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:offcallback=initMap"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJccPPExvsgFYS9jbUXoJIu4QdmdqGLlM&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:offcallback=initMap"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-</head>
-<style>
-	@import url('commonStyle.css');
-	@import url('/component/bottomTab/bottomStyle.css');
-	@import url('/component/headerTab/headerStyle.css');
-</style>
-<!-- 
+	<style>
+		@import url('commonStyle.css');
+		@import url('/component/bottomTab/bottomStyle.css');
+		@import url('/component/headerTab/headerStyle.css');
+	</style>
+	<!-- 
 	Todo:
 	1. 도로명주소 위도 경도 반환 / 0
 	2. 선호시설 json 지도에 삽입 / 0
@@ -22,6 +22,7 @@
 	5. 어떤 지역이 제일 합리적인지 계산 /  x
 	6. css / x
 -->
+
 <body style="margin: 0px; padding: 0px;">
 	<noscript>
 		You need to enable JavaScript to run this app.
@@ -32,7 +33,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script src="app.js" type="module"></script>
 </body>

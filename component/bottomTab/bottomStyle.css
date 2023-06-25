@@ -38,15 +38,20 @@
     height: 100%;
     display: flex;
   }
+
+ul.selectList li::before {
+    content: "";
+  }
+
 .selectList{
-    list-style: none;
     width: 100%;
     padding-left: 0px;
 }
+
 .contentslist li{
     border-bottom: 1px solid rgb(170, 170, 170);
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 
 }
   

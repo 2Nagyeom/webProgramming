@@ -32,11 +32,13 @@ export const createSelectList = (dataArray = [], iconImg) =>{
   return`
     ${dataArray.map((value,index)=>{
       return `
-      <li>
-        <img style="width:50px;height:50px" src="${iconImg}" >
-        <span style="font-size:20px; font-weight:600;">${value.name}</span>
-        <span style="display:flex;padding-left:55px;padding-top:10px">${value.소재지지번주소}</span>
-      </li>`
-    })}
+        <li style="padding-left:20px;">
+        <div style="display: flex; align-items: center;">
+          <img style="width:50px;height:50px" src="${iconImg}">
+          <span style="font-size:20px; font-weight:600; padding-left: 10px;">${value.name}</span>
+        </div>
+        <span style="display:flex;padding-left:60px;padding-top:1px;padding-bottom:5px">${value.소재지지번주소}</span>
+        </li>`
+    }).join("")}
   `
 }
