@@ -21,5 +21,3 @@ export default (container) => {
     `;
     container.innerHTML = template
 }
-
-// 치안, 거리, 선호시설, 그 외 복지시설
