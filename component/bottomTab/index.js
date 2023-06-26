@@ -29,6 +29,20 @@ export default function bottomTab() {
 }
 
 export const createSelectList = (dataArray = [], iconImg) =>{
+  const routePath = decodeURI(location.hash);
+  var guName = routePath.split('/')[3];
+  dataArray = dataArray.filter((value) => {
+    if(value.호선 !== undefined){
+      return true;
+    }
+    if(value.소재지지번주소 !== undefined){
+      return value.소재지지번주소.includes(guName)
+    }
+    if(value.관리기관명 !== undefined){
+      return value.관리기관명.includes(guName)
+    }
+    return false
+  })
   return `
     ${dataArray.map((value,index)=>{
       return `
