@@ -99,10 +99,11 @@ function hashDiffIcon() {
         복지관,
         여가문화,
         의료건강,
-        이용시설,
+        이용시설, 
         장애인단체,
     } = classifyPreference()
     const { center = [] } = store.getState()
+
     if (routeSplit.length >= 5) {
         deleteMarkers();
         switch (routeSplit[4]) {
@@ -111,7 +112,14 @@ function hashDiffIcon() {
                 document.getElementById('selectList').innerHTML = createSelectList(busan_cctv, img_Cctvicon);
                 break;
             case '범죄발생현황':
-                getColor(busan_gu);
+                let safety = 0;
+                for (var i = 0; i < busan_gu.features.length; i++) {
+                    if (routeSplit[3] == busan_gu.features[i].properties.name) {
+                        safety = busan_gu.features[i].properties.safety;
+                        break;
+                    }
+                }
+                document.getElementById('selectList').innerHTML = `<p style="padding: 20px;font-weight:600">${routeSplit[3]}의 범죄율은 <span style="color:blue">${safety}</span> 입니다</p>`;
                 break;
             case '편의시설':
                 makeIcon(busan_fastCharger, img_Fastchargericon);

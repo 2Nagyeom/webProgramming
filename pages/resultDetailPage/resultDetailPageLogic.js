@@ -34,7 +34,7 @@ export default () => {
         // shape: 'circle',
         indicator: [
           { name: "거리", max: 15 },
-          { name: "치안 안전 점수", max: 10 },
+          { name: "치안 안전 점수", max: 15 },
           { name: "선호 시설", max: 10 },
           { name: "그외 복지 시설", max: 10 },
         ],
