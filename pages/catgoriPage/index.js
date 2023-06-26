@@ -116,7 +116,7 @@ function hashDiffIcon() {
                 let roundedSafety = 0;
                 for (var i = 0; i < busan_gu.features.length; i++) {
                     if (routeSplit[3] == busan_gu.features[i].properties.name) {
-                        safety = busan_gu.features[i].properties.safety;
+                        safety = Number(busan_gu.features[i].properties.safety);
                         roundedSafety = Number(safety.toFixed(2));
                         break;
                     }
