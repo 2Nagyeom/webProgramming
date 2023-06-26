@@ -113,13 +113,15 @@ function hashDiffIcon() {
                 break;
             case '범죄발생현황':
                 let safety = 0;
+                let roundedSafety = 0;
                 for (var i = 0; i < busan_gu.features.length; i++) {
                     if (routeSplit[3] == busan_gu.features[i].properties.name) {
                         safety = busan_gu.features[i].properties.safety;
+                        roundedSafety = Number(safety.toFixed(2));
                         break;
                     }
                 }
-                document.getElementById('selectList').innerHTML = `<p style="padding: 20px;font-weight:600">${routeSplit[3]}의 범죄율은 <span style="color:blue">${safety}</span> 입니다</p>`;
+                document.getElementById('selectList').innerHTML = `<p style="padding: 20px;font-weight:600">${routeSplit[3]}의 범죄율은 <span style="color:blue">${roundedSafety}%</span> 입니다</p>`;
                 break;
             case '편의시설':
                 makeIcon(busan_fastCharger, img_Fastchargericon);
